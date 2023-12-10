@@ -28,20 +28,79 @@
 <body>
 
     <div id="root">
+        <ul>
+            <li v-for="item in shoplist">{{ item }}</li>
+        </ul>
 
-        
+        <!-- Add a input box for user input. -->
+        <!-- The input box for step 1 and 2: -->
+        <!-- <input id="inputItem" type="text"> -->
+
+        <!-- The input box for step 3 (with v-model): -->
+        <input id="inputItem" type="text" v-model="newItem">
+
+        <!-- Add a button, so that the input will be pushed to `shoplist` on a click event. -->
+
+        <!-- The button for step 1 and 2: -->
+        <!-- <button id="btn">Add item</button> -->
+
+        <!-- The button for step 3: -->
+        <button id="btn" v-on:click="addItem">Add item</button>
 
     </div>
 
     <script>
-        //Vue instance
-        let app = new Vue({
-            el: '#root',
+    let app = new Vue({
+        el: '#root',
+        data: {
+            // Define our current shoplist below.
+            shoplist: ['Salad', 'Eggs', 'Apples', 'Chicken'],
 
-            data: {
-                
+            // Add data for step 3:
+            newItem: '',
+        },
+
+        // Step 3: refactor the script in step 2, as we will use the `v-on` directive instead of the event listener script.
+        // Using VUE, we will make some changes in other places.
+        // Eventually, the functionality should be exactly the same, but the code will be much simpler!
+        methods: {
+            // --- Start of step 3: create a function `addItem`: ---
+            addItem() {
+                this.shoplist.push(this.newItem);
+                this.newItem = '';
             }
-        })
+
+        },
+        // --- End of step 3 ---
+
+        // Step 2: refactor the script in step 1, as we will use the `mounted` lifecycle hook.
+        // Use the `mounted` hook to fire event listener once everything is ready to go (data is bounded and instance is mounted to the DOM);
+        // After you complete it, test the functionality in the `index.html` preview, and then comment it for step 3.
+
+        // // --- Start of step 2: refactor ---
+        // mounted() {
+        //     document.querySelector("#btn").addEventListener("click", () => {
+        //         // On the click event: get the input, push it to `shoplist`, and clear the input box.
+        //         let item = document.querySelector("#inputItem");
+        //         app.shoplist.push(item.value);
+        //         item.value = '';
+        //     });
+        // }
+        // // --- End of step 2 ---
+    })
+
+    // Step 1: use vanilla script to achieve the goal.
+    // After you complete it, test the functionality in the `index.html` preview, and then comment it for step 2.
+
+    // // --- Start of step 1: create an event listener for the button `btn`. ---
+    // document.querySelector("#btn").addEventListener("click", () => {
+    //     // On the click event: get the input, push it to `shoplist`, and clear the input box.
+    //     let item = document.querySelector("#inputItem");
+    //     app.shoplist.push(item.value);
+    //     item.value = '';
+    // })
+    // // --- End of step 1 ---
+
     </script>
     
 </body>
